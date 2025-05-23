@@ -1,54 +1,94 @@
-# React + TypeScript + Vite
+Perfeito. Aqui está um modelo de README mais profissional, organizado e bem estruturado para seu projeto Electron + React + Tailwind + Vite:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# ⚡ Electron React Template
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Um template moderno para desenvolvimento de **aplicações desktop multiplataforma** utilizando:
 
-## Expanding the ESLint configuration
+- ⚛️ **React** para a interface
+- ⚡ **Vite** para bundling rápido e moderno
+- 🎨 **Tailwind CSS** para estilização
+- 🖥️ **Electron** para criação de apps desktop com tecnologias web
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+> Desenvolva, construa e distribua aplicativos para **Windows, macOS e Linux** de forma eficiente.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- [Electron](https://www.electronjs.org/) – Criação de aplicações desktop
+- [React](https://react.dev/) – Biblioteca para construção de interfaces
+- [Vite](https://vitejs.dev/) – Bundler ultrarrápido
+- [Tailwind CSS](https://tailwindcss.com/) – Estilização utilitária
+- [TypeScript](https://www.typescriptlang.org/) – Tipagem estática opcional
+- [ESLint](https://eslint.org/) – Padronização e análise de código
+- [Electron Builder](https://www.electron.build/) – Empacotamento e distribuição
+
+---
+
+## 📦 Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/EvanJoseph78/electron-react-vite-template
+
+# Acesse a pasta
+cd seu-repositorio
+
+# Instale as dependências
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 💻 Scripts Disponíveis
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+| Comando                      | Descrição                                                           |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `npm run dev`                | 🔥 Executa o app em modo desenvolvimento (Electron + Vite + React). |
+| `npm run dev:react`          | Executa **apenas** o front-end (Vite + React).                      |
+| `npm run dev:electron`       | Transpila o Electron e executa em modo desenvolvimento.             |
+| `npm run build`              | Gera o build de produção do front-end (Vite) e back-end (Electron). |
+| `npm run preview`            | Pré-visualiza apenas o front-end (após o build).                    |
+| `npm run transpile:electron` | Transpila apenas o código TypeScript do Electron.                   |
+| `npm run lint`               | Executa o ESLint para análise e padronização do código.             |
+| `npm run dist:win`           | Gera o instalador para **Windows** (arquitetura x64).               |
+| `npm run dist:mac`           | Gera o instalador para **macOS** (arquitetura ARM64).               |
+| `npm run dist:linux`         | Gera o instalador para **Linux** (arquitetura x64).                 |
+
+---
+
+## 🗂️ Estrutura de Pastas
+
 ```
+src/
+│
+├── electron/         # Processos principais do Electron
+│   └── main.ts
+│
+├── ui/               # Front-end (React + Vite + Tailwind)
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── ...
+│
+└── preload/          # Scripts de comunicação (contextBridge)
+```
+
+---
+
+## 🔐 Segurança
+
+> ⚠️ Atenção: Siga as recomendações oficiais de segurança do Electron para garantir que sua aplicação não tenha vulnerabilidades.
+
+Leia mais: [Electron Security Guidelines](https://www.electronjs.org/docs/latest/tutorial/security)
+
+---
+
+## 📜 Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
+
+Se quiser, eu posso gerar esse arquivo em `.md` e te enviar! Quer?
