@@ -59,6 +59,7 @@ function App() {
       <div>
         <h2>Random String from Electron:</h2>
         <p>{randomString}</p>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
       </div>
     </>
   );
