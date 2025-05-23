@@ -16,7 +16,7 @@ function App() {
 
     // Buscando a lista de usuários
     const fetchUsers = async () => {
-      const users = await window.electron.getUserList();
+      const users = await window.electron.user.getAll();
       console.log(users);
     };
 
@@ -26,8 +26,9 @@ function App() {
         nome: "Evandro Mariano",
         idade: 25,
         profissao: "Programador",
+        favoriteColor: "blue",
       };
-      const newUser = await window.electron.createUser(user);
+      const newUser = await window.electron.user.create(user);
       console.log(newUser);
     };
 

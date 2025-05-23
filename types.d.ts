@@ -2,13 +2,16 @@ type User = {
   nome: string;
   idade: number;
   profissao: string;
+  favoriteColor?: string;
 };
 
 interface Window {
   electron: {
     generateRandomString: () => Promise<string>;
     subscribeStatistic: (callback: (statistics: any) => void) => void;
-    getUserList: () => Promise<User[]>;
-    createUser: (user: User) => Promise<User>;
+    user: {
+      getAll: () => Promise<User[]>;
+      create: (user: User) => Promise<User>;
+    };
   };
 }
