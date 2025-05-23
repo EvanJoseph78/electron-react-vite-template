@@ -1,12 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  // @ts-ignore
-  window.electron.getStaticData();
+  const [randomString, setRandomString] = useState("");
+
+  useEffect(() => {
+    // Escutando o evento de string aleatória
+    // @ts-ignore
+    window.electron.subscribeStatistic((data) => {
+      setRandomString(data);
+    });
+
+    // Buscando a lista de usuários
+    const fetchUsers = async () => {
+      const users = await window.electron.getUserList();
+      console.log(users);
+    };
+
+    // função para criar um usuário
+    const createNewUser = async () => {
+      const user = {
+        nome: "Evandro Mariano",
+        idade: 25,
+        profissao: "Programador",
+      };
+      const newUser = await window.electron.createUser(user);
+      console.log(newUser);
+    };
+
+    createNewUser();
+
+    fetchUsers();
+  }, []);
 
   return (
     <>
@@ -27,6 +55,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+        <h2>Random String from Electron:</h2>
+        <p>{randomString}</p>
+      </div>
     </>
   );
 }

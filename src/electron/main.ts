@@ -1,8 +1,11 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import { isDev } from "./util.js";
-import { get } from "http";
 import { getPreloadPath } from "./pathResolver.js";
+import { poolResources } from "./resourceManager.js";
+
+// Importa o controller que registra os handlers IPC
+import "./controllers/userController.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
@@ -16,4 +19,6 @@ app.on("ready", () => {
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
   }
+
+  poolResources(mainWindow);
 });
