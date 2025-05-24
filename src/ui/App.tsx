@@ -23,10 +23,10 @@ function App() {
     // função para criar um usuário
     const createNewUser = async () => {
       const user = {
-        nome: "Evandro Mariano",
+        nome: "Evan Joseph",
         idade: 25,
-        profissao: "Programador",
-        favoriteColor: "blue",
+        profissao: "Developer",
+        favoriteColor: "Orange",
       };
       const newUser = await window.electron.user.create(user);
       console.log(newUser);
