@@ -22,25 +22,21 @@ interface Window {
   };
 }
 
-type SidebarItem = {
-  icon: React.ReactNode;
-  label: string;
-  route: string;
-  tolip: string;
-  buttons?: {
-    label: string;
-    route: string;
-    icon?: React.ReactNode;
-  }[];
-};
-
-type SidebarItems = SidebarItem[];
-
 // Define the structure of the client data
 type Client = {
   id: number;
   nome: string;
   email: string;
   telefone: string;
-};
+};  
 
+type DockButton = {
+  label: string;
+  icon: React.ReactNode;
+  contentSideBar: React.ReactNode;
+  mainContent: React.ReactNode;
+  sideContent?: {
+    btnName: string;
+    content: React.ReactNode;
+  }[];
+};

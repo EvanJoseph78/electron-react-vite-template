@@ -5,24 +5,6 @@ import { ipcRenderer, contextBridge } from "electron";
 // Isso permite que o frontend (React, etc.) se comunique com o backend (main) do Electron
 contextBridge.exposeInMainWorld("electron", {
   /**
-   * Função de teste simples.
-   * Apenas imprime "Evan Joseph" no console do renderer.
-   */
-  getStaticData: () => console.log("Evan Joseph"),
-
-  /**
-   * Inscreve um callback que será chamado toda vez que o evento "generateString" for emitido.
-   * Útil para receber dados em tempo real do processo principal (main).
-   *
-   * @param callback Função que recebe os dados enviados pelo evento.
-   */
-  subscribeStatistic: (callback: (statistics: any) => void) => {
-    ipcRenderer.on("generateString", (_: any, data: any) => {
-      callback(data);
-    });
-  },
-
-  /**
    * Namespace 'user' para agrupar funcionalidades relacionadas a usuários.
    */
   user: {
@@ -72,5 +54,5 @@ contextBridge.exposeInMainWorld("electron", {
     create: async (cliente: Client) => {
       return await ipcRenderer.invoke("cliente:create", cliente);
     },
-  }
+  },
 });

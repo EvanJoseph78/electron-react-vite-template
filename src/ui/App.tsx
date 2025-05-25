@@ -1,5 +1,4 @@
 import { Home, Settings, User } from "lucide-react";
-import "./App.css";
 import Dock from "./components/dock";
 import DockButtons from "./components/dock-buttons";
 import ClientesPage from "./pages/clientes/clientesPage";
