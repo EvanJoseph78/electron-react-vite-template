@@ -47,4 +47,30 @@ contextBridge.exposeInMainWorld("electron", {
       return await ipcRenderer.invoke("user:create", user);
     },
   },
+
+  /**
+   * Namespace 'cliente' para agrupar funcionalidades relacionadas a clientes.
+   */
+  cliente: {
+    /**
+     * Obtém a lista de todos os clientes.
+     * Faz uma chamada assíncrona para o main process através do canal 'cliente:getAll'.
+     *
+     * @returns Promise<Cliente[]> Lista de clientes.
+     */
+    getAll: async () => {
+      return await ipcRenderer.invoke("cliente:getAll");
+    },
+
+    /**
+     * Cria um novo cliente.
+     * Envia os dados do cliente para o processo principal através do canal 'cliente:create'.
+     *
+     * @param cliente Objeto com os dados do cliente.
+     * @returns Promise<Cliente> O cliente criado.
+     */
+    create: async (cliente: Client) => {
+      return await ipcRenderer.invoke("cliente:create", cliente);
+    },
+  }
 });

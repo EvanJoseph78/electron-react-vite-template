@@ -1,54 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClientFormModal from "./components/clientFormModal";
-
-// Exemplo de dados de clientes
-const clientes = [
-  {
-    id: 1,
-    nome: "Ana Souza",
-    email: "ana.souza@email.com",
-    telefone: "(11) 91234-5678",
-  },
-  {
-    id: 2,
-    nome: "Bruno Lima",
-    email: "bruno.lima@email.com",
-    telefone: "(21) 99876-5432",
-  },
-];
-
-// Função para editar cliente
-const handleEdit = (clienteId: number) => {
-  alert(`Editar cliente com ID: ${clienteId}`);
-};
-
-// Função para adicionar cliente
-const handleAddClient = (client: any) => {
-  clientes.push({
-    id: clientes.length > 0 ? clientes[clientes.length - 1].id + 1 : 1,
-    ...client,
-  });
-};
-
-// Função para atualizar cliente
-const handleUpdateClient = (clienteId: number, updatedData: any) => {
-  const idx = clientes.findIndex((c) => c.id === clienteId);
-  if (idx !== -1) {
-    clientes[idx] = { ...clientes[idx], ...updatedData };
-  }
-};
 
 const PAGE_SIZE = 5;
 
 const ClientesPage: React.FC = () => {
+  const [clientList, setClientList] = useState<Client[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(clientes.length / PAGE_SIZE);
+
+  // Função para editar cliente
+  const handleEdit = (clienteId: number) => {
+    alert(`Editar cliente com ID: ${clienteId}`);
+  };
+
+  // Função para buscar clientes do backend
+  const fetchClientes = async () => {
+    setIsLoading(true);
+    try {
+      const clientes = await window.electron.cliente.getAll();
+      setClientList(clientes);
+    } catch (error) {
+      console.error("Erro ao listar clientes:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Buscar clientes ao montar o componente
+  useEffect(() => {
+    fetchClientes();
+  }, []);
+
+  const totalPages = Math.ceil(clientList.length / PAGE_SIZE);
 
   // Clientes da página atual
-  const clientesPagina = clientes.slice(
+  const clientesPagina = clientList.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
@@ -117,11 +114,13 @@ const ClientesPage: React.FC = () => {
 
         <div className="divider"></div>
         <ClientFormModal
-          onSubmit={function (
+          onSubmit={async (
             _data: { name: string; email: string; phone: string },
             _event?: React.BaseSyntheticEvent
-          ): unknown | Promise<unknown> {
-            throw new Error("Function not implemented.");
+          ) => {
+            // Aqui você pode chamar a função para adicionar cliente no banco
+            // await window.electron.cliente.add(data);
+            await fetchClientes(); // Atualiza a lista após adicionar
           }}
         ></ClientFormModal>
       </div>

@@ -6,6 +6,7 @@ import { poolResources } from "./resourceManager.js";
 
 // Importa o controller que registra os handlers IPC
 import "./controllers/userController.js";
+import "./controllers/clienteController.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({

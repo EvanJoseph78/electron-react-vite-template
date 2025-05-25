@@ -27,7 +27,18 @@ function initializeDatabase() {
     )
   `;
 
+  // Cria a tabela 'clientes' se ela não existir
+  const createClientesTable = `
+    CREATE TABLE IF NOT EXISTS clientes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      email TEXT NOT NULL,
+      telefone TEXT
+    )
+  `;
+
   db.prepare(createUsersTable).run();
+  db.prepare(createClientesTable).run();
 }
 
 // Inicializa o banco de dados
