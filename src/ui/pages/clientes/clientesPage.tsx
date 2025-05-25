@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ClientFormModal from "./components/clientFormModal";
 
 // Exemplo de dados de clientes
 const clientes = [
@@ -16,15 +17,25 @@ const clientes = [
   },
 ];
 
+// Função para editar cliente
 const handleEdit = (clienteId: number) => {
   alert(`Editar cliente com ID: ${clienteId}`);
 };
 
+// Função para adicionar cliente
 const handleAddClient = (client: any) => {
   clientes.push({
     id: clientes.length > 0 ? clientes[clientes.length - 1].id + 1 : 1,
     ...client,
   });
+};
+
+// Função para atualizar cliente
+const handleUpdateClient = (clienteId: number, updatedData: any) => {
+  const idx = clientes.findIndex((c) => c.id === clienteId);
+  if (idx !== -1) {
+    clientes[idx] = { ...clientes[idx], ...updatedData };
+  }
 };
 
 const PAGE_SIZE = 5;
@@ -38,13 +49,6 @@ const ClientesPage: React.FC = () => {
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
-
-  // Atualiza a tabela ao adicionar cliente
-  const [_, forceUpdate] = useState({});
-  const handleAddClientAndUpdate = (client: any) => {
-    handleAddClient(client);
-    forceUpdate({});
-  };
 
   return (
     <div className="p-6">
@@ -111,73 +115,15 @@ const ClientesPage: React.FC = () => {
           </div>
         )}
 
-        {/* Botão para abrir o modal */}
-        <div className="flex justify-end mt-4">
-          <button
-            className="btn btn-primary"
-            onClick={() =>
-              (
-                document.getElementById(
-                  "add-cliente-modal"
-                ) as HTMLDialogElement
-              )?.showModal()
-            }
-          >
-            Adicionar Cliente
-          </button>
-        </div>
-
-        {/* Modal DaisyUI */}
-        <dialog id="add-cliente-modal" className="modal">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg mb-4">Adicionar Cliente</h3>
-            <form method="dialog" className="flex flex-col gap-3">
-              <input
-                type="text"
-                placeholder="Nome"
-                className="input input-bordered w-full"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="input input-bordered w-full"
-              />
-              <input
-                type="tel"
-                placeholder="Telefone"
-                className="input input-bordered w-full"
-              />
-              <div className="modal-action">
-                <button className="btn">Cancelar</button>
-                <button
-                  className="btn btn-primary"
-                  type="button"
-                  onClick={() => {
-                    const form = document.querySelector(
-                      "#add-cliente-modal form"
-                    ) as HTMLFormElement;
-                    const nome = (form.elements[0] as HTMLInputElement).value;
-                    const email = (form.elements[1] as HTMLInputElement).value;
-                    const telefone = (form.elements[2] as HTMLInputElement)
-                      .value;
-                    handleAddClientAndUpdate({ nome, email, telefone });
-                    (form.elements[0] as HTMLInputElement).value = "";
-                    (form.elements[1] as HTMLInputElement).value = "";
-                    (form.elements[2] as HTMLInputElement).value = "";
-                    (
-                      document.getElementById(
-                        "add-cliente-modal"
-                      ) as HTMLDialogElement
-                    )?.close();
-                  }}
-                >
-                  Salvar
-                </button>
-              </div>
-            </form>
-          </div>
-        </dialog>
         <div className="divider"></div>
+        <ClientFormModal
+          onSubmit={function (
+            _data: { name: string; email: string; phone: string },
+            _event?: React.BaseSyntheticEvent
+          ): unknown | Promise<unknown> {
+            throw new Error("Function not implemented.");
+          }}
+        ></ClientFormModal>
       </div>
     </div>
   );
