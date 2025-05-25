@@ -15,3 +15,17 @@ interface Window {
     };
   };
 }
+
+type SidebarItem = {
+  icon: React.ReactNode;
+  label: string;
+  route: string;
+  tolip: string;
+  buttons?: {
+    label: string;
+    route: string;
+    icon?: React.ReactNode;
+  }[];
+};
+
+type SidebarItems = SidebarItem[];

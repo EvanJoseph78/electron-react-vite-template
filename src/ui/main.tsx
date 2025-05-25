@@ -8,7 +8,7 @@ import AppRoutes from "./routes/AppRoutes.tsx";
 
 function App() {
   return (
-    <div className="flex h-full" data-theme="latetwist">
+    <div className="flex h-screen" data-theme="latetwist">
       <SidebarPanel />
       <main className="flex flex-col flex-1 w-full">
         <Menubar />

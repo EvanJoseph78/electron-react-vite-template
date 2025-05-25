@@ -10,7 +10,8 @@ import {
   User,
 } from "lucide-react";
 
-const sidebarItems = [
+// -------------------- Sidebar Items Definition --------------------
+const sidebarItems: SidebarItems = [
   {
     icon: <Home />,
     label: "Home",
@@ -22,7 +23,7 @@ const sidebarItems = [
         route: "/dashboard",
         icon: <LayoutDashboardIcon />,
       },
-      { label: "Clientes", route: "/cadastron", icon: <User /> },
+      { label: "Clientes", route: "/clientes", icon: <User /> },
       { label: "Fornecedores", route: "/finaceiro", icon: <Truck /> },
       {
         label: "Despesas",
@@ -60,29 +61,31 @@ const sidebarItems = [
   },
 ];
 
+// -------------------- SidebarPanel Component --------------------
 const SidebarPanel = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-row w-74 bg-neutral text-base-100 h-screen">
-      {/* Sidebar */}
-      <aside className="sidebar-panel bg-base-100 flex flex-col items-center w-20 border-r border-zinc-200 shadow-lg h-full py-2">
+    <div className="flex flex-row w-74 bg-neutral text-base-100 h-full">
+      {/* -------------------- Sidebar -------------------- */}
+      <aside className="sidebar-panel bg-base-100 flex flex-col items-center w-16 border-r border-zinc-200 shadow-lg h-full py-2">
+        {/* App Icon Section */}
         <div className="flex items-center justify-center w-full">
-          {/* Espaço para ícone do aplicativo */}
           <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-md">
             {/* Substitua pelo ícone do seu app */}
             <span className="text-2xl text-white font-bold">7</span>
           </div>
         </div>
         <div className="divider divider-zinc-700 my-1"></div>
+        {/* Sidebar Navigation Buttons */}
         <div className="flex flex-col gap-3 w-full mt-4">
           {sidebarItems.map((item, idx) => (
             <button
               key={item.label}
               data-tip={item.tolip}
               data-tip-id={item.tolip}
-              className={`btn btn-square w-14 h-14 mx-auto flex items-center justify-center transition-all duration-200 
+              className={`btn btn-square w-11 h-11 rounded-full mx-auto flex items-center justify-center transition-all duration-200 
           ${
             activeIdx === idx
               ? "bg-primary text-primary-content shadow-lg scale-105"
@@ -102,7 +105,9 @@ const SidebarPanel = () => {
         </div>
       </aside>
 
+      {/* -------------------- Main Panel -------------------- */}
       <div className="flex flex-col flex-1 p-2 pt-1 gap-2 justify-start items-start bg-zinc-800">
+        {/* User Info Section */}
         <div className="flex items-center w-full mb-4 px-2 flex-col ">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-primary ">PDV</h2>
@@ -122,6 +127,7 @@ const SidebarPanel = () => {
           <span className="text-xs text-zinc-400">evan.joseph@email.com</span>
         </div>
 
+        {/* Submenu Buttons Section */}
         {sidebarItems[activeIdx]?.buttons?.map((button) => (
           <button
             key={button.label}
@@ -138,6 +144,8 @@ const SidebarPanel = () => {
             {button.label}
           </button>
         ))}
+
+        {/* Footer Section */}
         <div className="flex w-full justify-center mt-auto pb-4 text-xs text-zinc-400">
           © 2024 Evan Joseph
         </div>
