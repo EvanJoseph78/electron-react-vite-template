@@ -35,7 +35,7 @@ const sidebarItems: SidebarItems = [
   {
     icon: <Store />,
     label: "Estoque",
-    route: "/estoque",
+    route: "/clientes",
     tolip: "Estoque",
     buttons: [
       { label: "Movimentar", route: "/estoque/produtos", icon: <Store /> },
@@ -106,7 +106,7 @@ const SidebarPanel = () => {
       </aside>
 
       {/* -------------------- Main Panel -------------------- */}
-      <div className="flex flex-col flex-1 p-2 pt-1 gap-2 justify-start items-start bg-zinc-800">
+      <div className="flex flex-col flex-1 p-2 pt-1 gap-2 justify-start items-start bg-neutral-800">
         {/* User Info Section */}
         <div className="flex items-center w-full mb-4 px-2 flex-col ">
           <div className="text-center mb-6">
@@ -116,7 +116,7 @@ const SidebarPanel = () => {
             </span>
             <div className="divider divider-primary my-1 "></div>
           </div>
-          <img 
+          <img
             src="https://ui-avatars.com/api/?name=Evan+Joseph"
             alt="User avatar"
             className="w-16 h-16 rounded-full border-2 border-primary mr-3"

@@ -2,7 +2,7 @@ import { app, BrowserWindow } from "electron";
 import path from "path";
 import { isDev } from "./util.js";
 import { getPreloadPath } from "./pathResolver.js";
-import { poolResources } from "./resourceManager.js";
+// import { poolResources } from "./resourceManager.js";
 
 // Importa o controller que registra os handlers IPC
 import "./controllers/userController.js";

@@ -1,48 +1,81 @@
-// import { useEffect, useState } from "react";
-// import reactLogo from "./assets/react.svg";
+import { Home, Settings, User } from "lucide-react";
 import "./App.css";
-import Menubar from "./components/menubar";
-// import Tabs from "./components/tabs";
+import Dock from "./components/dock";
+import DockButtons from "./components/dock-buttons";
+import ClientesPage from "./pages/clientes/clientesPage";
 
 function App() {
-  // const [count, setCount] = useState(0);
-
-  // const [randomString, setRandomString] = useState("");
-
-  // useEffect(() => {
-  //   // Escutando o evento de string aleatória
-  //   // @ts-ignore
-  //   window.electron.subscribeStatistic((data) => {
-  //     setRandomString(data);
-  //   });
-
-  //   // Buscando a lista de usuários
-  //   const fetchUsers = async () => {
-  //     const users = await window.electron.user.getAll();
-  //     console.log(users);
-  //   };
-
-  //   // função para criar um usuário
-  //   const createNewUser = async () => {
-  //     const user = {
-  //       nome: "Evan Joseph",
-  //       idade: 25,
-  //       profissao: "Developer",
-  //       favoriteColor: "Orange",
-  //     };
-  //     const newUser = await window.electron.user.create(user);
-  //     console.log(newUser);
-  //   };
-
-  //   createNewUser();
-
-  //   fetchUsers();
-  // }, []);
-
   return (
-    <div>
-      <Menubar></Menubar>
-      {/* <Tabs></Tabs> */}
+    <div className="flex h-screen w-screen" data-theme="latetwist">
+      <Dock
+        buttons={[
+          {
+            label: "Home",
+            icon: <Home />,
+            contentSideBar: (
+              <DockButtons
+                buttons={[
+                  {
+                    label: "Dashboard",
+                    icon: <User />,
+                    mainContent: <div>Informações do perfil do usuário.</div>,
+                  },
+                  {
+                    label: "Clinte",
+                    icon: <User />,
+                    mainContent: <ClientesPage></ClientesPage>,
+                  },
+                ]}
+              />
+            ),
+            mainContent: <div>Este é o conteúdo principal da Home.</div>,
+          },
+          {
+            label: "Usuário",
+            icon: <User />,
+            contentSideBar: (
+              <DockButtons
+                buttons={[
+                  {
+                    label: "Perfil",
+                    icon: <User />,
+                    mainContent: <div>Informações do perfil do usuário.</div>,
+                  },
+                  {
+                    label: "Configurações",
+                    icon: <Settings />,
+                    mainContent: <div>Configurações do usuário.</div>,
+                  },
+                ]}
+              />
+            ),
+            mainContent: (
+              <div>Selecione uma opção no menu lateral do Usuário.</div>
+            ),
+          },
+          {
+            label: "Configurações",
+            icon: <Settings />,
+            contentSideBar: (
+              <DockButtons
+                buttons={[
+                  {
+                    label: "Perfil",
+                    icon: <User />,
+                    mainContent: <div>Informações do perfil do usuário.</div>,
+                  },
+                  {
+                    label: "Configurações",
+                    icon: <Settings />,
+                    mainContent: <div>Configurações do usuário.</div>,
+                  },
+                ]}
+              />
+            ),
+            mainContent: <div>Configurações gerais do sistema.</div>,
+          },
+        ]}
+      />
     </div>
   );
 }

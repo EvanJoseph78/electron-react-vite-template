@@ -19,6 +19,7 @@ const ClientesPage: React.FC = () => {
     try {
       const clientes = await window.electron.cliente.getAll();
       setClientList(clientes);
+      console.log("Clientes recebidos:", clientes);
     } catch (error) {
       console.error("Erro ao listar clientes:", error);
     } finally {
@@ -66,8 +67,8 @@ const ClientesPage: React.FC = () => {
               <tr key={cliente.id}>
                 <td>{cliente.id}</td>
                 <td>{cliente.nome}</td>
-                <td>{cliente.email}</td>
                 <td>{cliente.telefone}</td>
+                <td>{cliente.email}</td>
                 <td>
                   <button
                     className="btn btn-primary btn-sm"
