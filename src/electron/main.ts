@@ -20,5 +20,10 @@ app.on("ready", () => {
     mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
   }
 
+  // Desativa a barra de menu
+  mainWindow.setMenuBarVisibility(false);
+  // Ou para remover totalmente:
+  // mainWindow.setMenu(null);
+
   // poolResources(mainWindow);
 });

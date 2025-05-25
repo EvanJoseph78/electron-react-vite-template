@@ -21,6 +21,8 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
     "better-sqlite3": "^11.10.0",
+    "daisyui": "^5.0.37",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",
