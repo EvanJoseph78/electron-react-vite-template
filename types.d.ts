@@ -1,3 +1,14 @@
+// =====================
+// Database Models
+// =====================
+
+type Client = {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+};
+
 type User = {
   nome: string;
   idade: number;
@@ -5,10 +16,37 @@ type User = {
   favoriteColor?: string;
 };
 
+// =====================
+// JSX Element Types
+// =====================
+
+type DockButton = {
+  label: string;
+  icon?: React.ReactNode;
+  mainContent?: React.ReactNode;
+};
+
+type DockProps = {
+  buttons: DockButton[];
+  initialActiveIndex?: number;
+  onChange?: (index: number) => void;
+};
+
+type DockConfigItem = {
+  label: string;
+  icon: JSX.Element;
+  contentSideBar: JSX.Element;
+  mainContent: JSX.Element;
+};
+
+type DockConfig = DockConfigItem[];
+
+// =====================
+// Window Interface
+// =====================
+
 interface Window {
   electron: {
-    generateRandomString: () => Promise<string>;
-    subscribeStatistic: (callback: (statistics: any) => void) => void;
     user: {
       getAll: () => Promise<User[]>;
       create: (user: User) => Promise<User>;
@@ -21,22 +59,3 @@ interface Window {
     };
   };
 }
-
-// Define the structure of the client data
-type Client = {
-  id: number;
-  nome: string;
-  email: string;
-  telefone: string;
-};  
-
-type DockButton = {
-  label: string;
-  icon: React.ReactNode;
-  contentSideBar: React.ReactNode;
-  mainContent: React.ReactNode;
-  sideContent?: {
-    btnName: string;
-    content: React.ReactNode;
-  }[];
-};

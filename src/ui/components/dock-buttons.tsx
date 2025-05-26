@@ -1,17 +1,5 @@
 import React, { useState } from "react";
 
-type DockButton = {
-  label: string;
-  icon?: React.ReactNode;
-  mainContent?: React.ReactNode;
-};
-
-type DockProps = {
-  buttons: DockButton[];
-  initialActiveIndex?: number;
-  onChange?: (index: number) => void;
-};
-
 const DockButtons: React.FC<DockProps> = ({
   buttons,
   initialActiveIndex = 0,
