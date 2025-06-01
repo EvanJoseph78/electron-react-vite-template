@@ -3,11 +3,12 @@ const stats = [
   { label: "Vendas", value: 350, icon: "💰" },
   { label: "Visitantes", value: 4800, icon: "👀" },
   { label: "Tickets", value: 87, icon: "🎫" },
+  { label: "Clientes", value: 5, icon: "🎫" },
 ];
 
 const DashboardPage: React.FC = () => {
   return (
-    <div className="p-8 bg-base-200 min-h-screen">
+    <div className="p-8 bg-base-200 h-full">
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         {stats.map((stat) => (

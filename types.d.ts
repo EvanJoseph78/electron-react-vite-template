@@ -3,10 +3,17 @@
 // =====================
 
 type Client = {
-  id: number;
-  nome: string;
-  email: string;
-  telefone: string;
+  id?: number;
+  nome: string; // obrigatório
+  telefone?: string;
+  endereco?: string;
+  numero?: string;
+  email?: string;
+  bairro?: string;
+  cidade?: string;
+  estado?: string;
+  cpf?: string;
+  cnpj?: string;
 };
 
 type User = {

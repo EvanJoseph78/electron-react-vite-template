@@ -56,7 +56,7 @@ const Dock: React.FC<DockProps> = ({ buttons }) => {
 };
 
 export default Dock;
-
+   
 /*
 Adicione estas classes ao seu CSS principal:
 

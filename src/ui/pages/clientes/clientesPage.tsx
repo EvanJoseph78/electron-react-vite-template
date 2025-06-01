@@ -57,8 +57,8 @@ const ClientesPage: React.FC = () => {
             <tr>
               <th>ID</th>
               <th>Nome</th>
-              <th>Email</th>
               <th>Telefone</th>
+              <th>Email</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -72,7 +72,7 @@ const ClientesPage: React.FC = () => {
                 <td>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() => handleEdit(cliente.id)}
+                    onClick={() => handleEdit(cliente.id!)}
                   >
                     Editar
                   </button>

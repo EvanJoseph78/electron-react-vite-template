@@ -66,6 +66,29 @@ const dockConfig: DockConfig = [
         ]}
       />
     ),
+    
+    mainContent: <div>Configurações gerais do sistema.</div>,
+  },
+  {
+    label: "Outro botão",
+    icon: <Settings />,
+    contentSideBar: (
+      <DockButtons
+        buttons={[
+          {
+            label: "Perfil",
+            icon: <User />,
+            mainContent: <div>Informações do perfil do usuário.</div>,
+          },
+          {
+            label: "Configurações",
+            icon: <Settings />,
+            mainContent: <div>Configurações do usuário.</div>,
+          },
+        ]}
+      />
+    ),
+    
     mainContent: <div>Configurações gerais do sistema.</div>,
   },
 ];

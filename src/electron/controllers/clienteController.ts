@@ -16,13 +16,8 @@ ipcMain.handle(`${CLIENTE_CHANNEL}:getAll`, async () => {
     return clientes;
 });
 
-/**
- * Handler para criar um cliente.
- * Canal: cliente:create
- * @param _event Evento IPC (não utilizado).
- * @param cliente Objeto com os dados do cliente.
- */
 ipcMain.handle(`${CLIENTE_CHANNEL}:create`, async (_event, cliente) => {
-    const newCliente = await createCliente(cliente.nome, cliente.telefone, cliente.email);
-    return newCliente;
+  // cliente é esperado um objeto com { nome, telefone, email }
+  const newCliente = await createCliente(cliente);
+  return newCliente;
 });

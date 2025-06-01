@@ -48,10 +48,10 @@ contextBridge.exposeInMainWorld("electron", {
      * Cria um novo cliente.
      * Envia os dados do cliente para o processo principal através do canal 'cliente:create'.
      *
-     * @param cliente Objeto com os dados do cliente.
+     * @param Omit<Client, 'id'> Objeto com os dados do cliente.
      * @returns Promise<Cliente> O cliente criado.
      */
-    create: async (cliente: Client) => {
+    create: async (cliente: Omit<Client, 'id'>) => {
       return await ipcRenderer.invoke("cliente:create", cliente);
     },
   },

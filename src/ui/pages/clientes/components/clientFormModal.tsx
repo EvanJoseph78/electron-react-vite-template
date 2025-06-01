@@ -28,8 +28,8 @@ const ClientFormModal: React.FC<{
 
   const handleFormSubmit: SubmitHandler<ClientFormInputs> = async (data) => {
     try {
-      const client: Client = {
-        id: 0,
+      const client: Omit<Client, 'id'> = {
+        // id: 0,
         nome: data.name,
         email: data.email,
         telefone: data.phone,
@@ -40,23 +40,10 @@ const ClientFormModal: React.FC<{
       await onSubmit(data);
 
       console.log("Cliente salvo no banco de dados:", client);
-      saveClientToDB(client);
       reset();
       handleClose();
     } catch (error) {
       console.error("Erro ao salvar cliente:", error);
-    }
-  };
-
-  // Função para salvar cliente no banco de dados via IPC
-  const saveClientToDB = async (client: Client) => {
-    try {
-      await window.electron.cliente.create(client);
-      // Você pode adicionar um toast ou feedback de sucesso aqui, se desejar
-      console.log("Cliente salvo no banco de dados:", client);
-    } catch (error) {
-      console.error("Erro ao salvar cliente no banco de dados:", error);
-      // Você pode adicionar um toast ou feedback de erro aqui, se desejar
     }
   };
 
