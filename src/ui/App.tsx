@@ -3,6 +3,7 @@ import Dock from "./components/dock";
 import DockButtons from "./components/dock-buttons";
 import ClientesPage from "./pages/clientes/clientesPage";
 import Dashboard from "./pages/dashboard/dashboardPage";
+import UserPage from "./pages/user/userPage";
 
 const dockConfig: DockConfig = [
   {
@@ -35,7 +36,7 @@ const dockConfig: DockConfig = [
           {
             label: "Perfil",
             icon: <User />,
-            mainContent: <div>Informações do perfil do usuário.</div>,
+            mainContent: <UserPage/>,
           },
           {
             label: "Configurações",
