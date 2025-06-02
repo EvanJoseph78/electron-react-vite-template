@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -77,12 +78,13 @@ const ClientFormModal: React.FC<{
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleOpen}>
-        Novo Cliente
+      <button className="btn btn-primary rounded-md shadow-xl" onClick={handleOpen}>
+        <Plus></Plus>
+        Cadastrar
       </button>
       {open && (
         <div className="modal modal-open flex items-center justify-center">
-          <div className="modal-box w-full max-w-md shadow-lg rounded-lg bg-base-100 ">
+          <div className="modal-box w-full max-w-md shadow-lg rounded-xs bg-base-100 ">
             <button
               type="button"
               className="absolute top-3 right-3 btn btn-sm btn-circle btn-ghost"

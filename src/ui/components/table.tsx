@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, type ReactNode } from "react";
 import {
   Search,
   X,
@@ -24,6 +24,7 @@ type TableProps = {
   onDelete?: (row: Record<string, any>) => void;
   pagination?: boolean;
   itemsPerPage?: number;
+  createBtn?: ReactNode;
 };
 
 const DynamicTable: React.FC<TableProps> = ({
@@ -38,6 +39,7 @@ const DynamicTable: React.FC<TableProps> = ({
   onDelete,
   pagination = true,
   itemsPerPage = 10,
+  createBtn,
 }) => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
@@ -135,13 +137,17 @@ const DynamicTable: React.FC<TableProps> = ({
       <div className="space-y-4">
         <div className="flex flex-wrap justify-between items-center gap-2">
           <div className="flex gap-2">
-            <button
-              className="flex items-center gap-2 border p-2 rounded-md bg-primary text-base-100 shadow-md cursor-pointer "
-              onClick={onCreate}
-            >
-              <Plus />
-              Cadastrar
-            </button>
+            {createBtn ? (
+              createBtn
+            ) : (
+              <button
+                className="flex items-center gap-2 border p-2 rounded-md bg-primary text-base-100 shadow-md cursor-pointer"
+                onClick={onCreate}
+              >
+                <Plus />
+                Cadastrar
+              </button>
+            )}
           </div>
 
           <div className="flex gap-2 items-center">
@@ -199,16 +205,16 @@ const DynamicTable: React.FC<TableProps> = ({
               </div>
             ) : (
               <div
-                className="p-2 "
+                className="p-2 cursor-pointer"
                 onClick={() => setSearchVisible(true)}
                 title="Buscar"
               >
-                <Search size={18} className="h-6 w-6 flex cursor-pointer"/>
+                <Search size={24} className="h-6 w-6" />
               </div>
             )}
 
             <div onClick={onRefresh} title="Atualizar">
-              <RefreshCcw className="text-green-500 cursor-pointer" />
+              <RefreshCcw className="text-green-500 cursor-pointer " />
             </div>
           </div>
         </div>
