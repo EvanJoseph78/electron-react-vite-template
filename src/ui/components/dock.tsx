@@ -48,8 +48,8 @@ const Dock: React.FC<DockProps> = ({ buttons }) => {
           </button>
         ))}
       </nav>
-      <main className="flex-1 bg-zinc-500 flex fade-in" key={activeIndex}>
-        {buttons[activeIndex]?.contentSideBar}
+      <main className="flex-1 bg-zinc-500 flex fade-in h-full overscroll-auto" key={activeIndex}>
+        {buttons[activeIndex]?.contentSideBar} 
       </main>
     </div>
   );
@@ -57,17 +57,4 @@ const Dock: React.FC<DockProps> = ({ buttons }) => {
 
 export default Dock;
    
-/*
-Adicione estas classes ao seu CSS principal:
 
-.fade-in {
-    animation: fadeIn 0.4s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(16px);}
-    to { opacity: 1; transform: translateY(0);}
-}
-
-.dock-indicator {
-    /* Nenhuma regra extra, mas pode ser usada para customização futura */

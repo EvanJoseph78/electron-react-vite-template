@@ -15,7 +15,7 @@ const DockButtons: React.FC<DockProps> = ({
   };
 
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full ">
       <nav className="flex flex-col bg-neutral-800 py-2 w-56 items-center gap-2">
         {/* User Info Section */}
         <div className="flex items-center w-full mb-4 px-2 flex-col ">

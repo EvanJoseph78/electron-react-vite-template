@@ -1,5 +1,16 @@
 import React, { useMemo, useState } from "react";
-import { Search, X, ChevronDown } from "lucide-react";
+import {
+  Search,
+  X,
+  ChevronDown,
+  Edit,
+  Trash,
+  RefreshCcw,
+  ArrowDownUp,
+  ArrowBigUp,
+  ArrowBigDown,
+  Plus,
+} from "lucide-react";
 
 type TableProps = {
   columns: string[];
@@ -26,7 +37,7 @@ const DynamicTable: React.FC<TableProps> = ({
   onEdit,
   onDelete,
   pagination = true,
-  itemsPerPage = 15,
+  itemsPerPage = 10,
 }) => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
@@ -119,161 +130,176 @@ const DynamicTable: React.FC<TableProps> = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 flex flex-col h-full justify-between overflow-auto">
       {/* Header */}
-      <div className="flex flex-wrap justify-between items-center gap-2">
-        <div className="flex gap-2">
-          <button className="btn btn-primary btn-sm" onClick={onCreate}>
-            Cadastrar
-          </button>
-        </div>
-
-        <div className="flex gap-2 items-center">
-          {searchVisible ? (
-            <div className="relative">
-              <div className="flex items-center border rounded-md bg-white">
-                <div
-                  className="flex items-center gap-1 px-2 cursor-pointer hover:bg-gray-100 rounded-l-md"
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
-                  <span className="font-semibold capitalize">
-                    {searchColumn}
-                  </span>
-                  <ChevronDown size={14} />
-                </div>
-
-                <input
-                  type="text"
-                  className="input input-xs border-0 focus:outline-none"
-                  placeholder={`Buscar em ${searchColumn}...`}
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                />
-
-                <button
-                  className="btn btn-xs btn-circle btn-ghost"
-                  onClick={clearSearch}
-                  title="Limpar"
-                >
-                  <X size={16} />
-                </button>
-              </div>
-
-              {/* Dropdown */}
-              {dropdownOpen && (
-                <div className="absolute z-20 mt-1 bg-white border rounded-md shadow-md w-40">
-                  {columns.map((col) => (
-                    <div
-                      key={col}
-                      onClick={() => {
-                        setSearchColumn(col);
-                        setDropdownOpen(false);
-                      }}
-                      className={`px-3 py-1 cursor-pointer hover:bg-gray-100 ${
-                        col === searchColumn ? "bg-gray-100 font-semibold" : ""
-                      }`}
-                    >
-                      {col}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ) : (
+      <div className="space-y-4">
+        <div className="flex flex-wrap justify-between items-center gap-2">
+          <div className="flex gap-2">
             <button
-              className="btn btn-sm btn-ghost"
-              onClick={() => setSearchVisible(true)}
-              title="Buscar"
+              className="flex items-center gap-2 border p-2 rounded-md bg-primary text-base-100 shadow-md cursor-pointer "
+              onClick={onCreate}
             >
-              <Search size={18} />
+              <Plus />
+              Cadastrar
             </button>
-          )}
+          </div>
 
-          <button
-            className="btn btn-outline btn-sm"
-            onClick={onRefresh}
-            title="Atualizar"
-          >
-            Atualizar
-          </button>
-        </div>
-      </div>
-
-      {/* Tabela */}
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead>
-            <tr>
-              {columns.map((col) => (
-                <th
-                  key={col}
-                  className={`capitalize ${
-                    sortableColumns.includes(col)
-                      ? "cursor-pointer select-none"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    if (sortableColumns.includes(col)) handleSort(col);
-                  }}
-                >
-                  {col}
-                  {sortableColumns.includes(col) && (
-                    <span className="ml-1">
-                      {sortColumn === col
-                        ? sortDirection === "asc"
-                          ? "▲"
-                          : "▼"
-                        : "⇅"}
+          <div className="flex gap-2 items-center">
+            {searchVisible ? (
+              <div className="relative">
+                <div className="flex items-center border rounded-md bg-white p-2">
+                  <div
+                    className="flex items-center gap-1 px-2 cursor-pointer hover:bg-gray-100 rounded-l-md"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    <span className="font-semibold capitalize">
+                      {searchColumn}
                     </span>
-                  )}
-                </th>
-              ))}
-              {(editButtons || deleteButtons) && <th>Ações</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedData.length === 0 ? (
-              <tr>
-                <td colSpan={columns.length + 1} className="text-center">
-                  Nenhum dado encontrado.
-                </td>
-              </tr>
+                    <ChevronDown size={14} />
+                  </div>
+
+                  <input
+                    type="text"
+                    className="input input-xs border-0 focus:outline-none"
+                    placeholder={`Buscar em ${searchColumn}...`}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+
+                  <button
+                    className="btn btn-xs btn-circle btn-ghost"
+                    onClick={clearSearch}
+                    title="Limpar"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                {/* Dropdown */}
+                {dropdownOpen && (
+                  <div className="absolute z-20 mt-1 bg-white border rounded-md shadow-md w-40 ">
+                    {columns.map((col) => (
+                      <div
+                        key={col}
+                        onClick={() => {
+                          setSearchColumn(col);
+                          setDropdownOpen(false);
+                        }}
+                        className={`px-3 py-1 cursor-pointer hover:bg-gray-100 ${
+                          col === searchColumn
+                            ? "bg-gray-100 font-semibold"
+                            : ""
+                        }`}
+                      >
+                        {col}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ) : (
-              paginatedData.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {columns.map((col) => (
-                    <td key={col}>{row[col] ?? "-"}</td>
-                  ))}
-                  {(editButtons || deleteButtons) && (
-                    <td className="flex gap-2">
-                      {editButtons && (
-                        <button
-                          className="btn btn-xs btn-info"
-                          onClick={() => onEdit?.(row)}
-                        >
-                          Editar
-                        </button>
-                      )}
-                      {deleteButtons && (
-                        <button
-                          className="btn btn-xs btn-error"
-                          onClick={() => onDelete?.(row)}
-                        >
-                          Excluir
-                        </button>
-                      )}
-                    </td>
-                  )}
-                </tr>
-              ))
+              <div
+                className="p-2 "
+                onClick={() => setSearchVisible(true)}
+                title="Buscar"
+              >
+                <Search size={18} className="h-6 w-6 flex cursor-pointer"/>
+              </div>
             )}
-          </tbody>
-        </table>
+
+            <div onClick={onRefresh} title="Atualizar">
+              <RefreshCcw className="text-green-500 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+
+        {/* Tabela */}
+        <div className="overflow-x-auto border border-neutral-300 shadow-md rounded-md">
+          <table className="table table-zebra w-full over ">
+            <thead className="bg-neutral-700 text-base-100">
+              <tr className="">
+                {columns.map((col) => (
+                  <th
+                    key={col}
+                    className={`capitalize ${
+                      sortableColumns.includes(col)
+                        ? "cursor-pointer select-none hover:text-primary "
+                        : ""
+                    }`}
+                    onClick={() => {
+                      if (sortableColumns.includes(col)) handleSort(col);
+                    }}
+                  >
+                    <div className="flex items-center content-center">
+                      {col}
+                      {sortableColumns.includes(col) && (
+                        <span className="ml-1 ">
+                          {sortColumn === col ? (
+                            sortDirection === "asc" ? (
+                              <ArrowBigUp className="w-6 h-6 text-primary" />
+                            ) : (
+                              <ArrowBigDown className="w-6 h-6 text-primary" />
+                            )
+                          ) : (
+                            <ArrowDownUp className="w-6 h-6" />
+                          )}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                ))}
+                {(editButtons || deleteButtons) && <th>Ações</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedData.length === 0 ? (
+                <tr className="">
+                  <td colSpan={columns.length + 1} className="text-center ">
+                    Nenhum dado encontrado.
+                  </td>
+                </tr>
+              ) : (
+                paginatedData.map((row, rowIndex) => (
+                  <tr
+                    key={rowIndex}
+                    className="bg-base-300 hover:bg-primary/50 transition-colors duration-300 cursor-pointer"
+                  >
+                    {columns.map((col) => (
+                      <td className="cursor-pointer" key={col}>
+                        <div className="cursor-auto">{row[col] ?? "-"}</div>
+                      </td>
+                    ))}
+                    {(editButtons || deleteButtons) && (
+                      <td className="flex gap-2 ">
+                        {editButtons && (
+                          <div className="tooltip" data-tip="Editar">
+                            <Edit
+                              className=" btn-xs btn-info text-blue-500"
+                              onClick={() => onEdit?.(row)}
+                            ></Edit>
+                          </div>
+                        )}
+                        {deleteButtons && (
+                          <div className="tooltip" data-tip="Excluir">
+                            <Trash
+                              className="btn-xs btn-error text-red-500"
+                              onClick={() => onDelete?.(row)}
+                            />
+                          </div>
+                        )}
+                      </td>
+                    )}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Paginação */}
       {pagination && totalPages > 1 && (
-        <div className="flex justify-center gap-1">
+        <div className="flex justify-center gap-1 ">
           <button
             className="btn btn-sm"
             onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}

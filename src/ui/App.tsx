@@ -1,103 +1,12 @@
-import { Home, Settings, User } from "lucide-react";
-import Dock from "./components/dock";
-import DockButtons from "./components/dock-buttons";
-import ClientesPage from "./pages/clientes/clientesPage";
-import Dashboard from "./pages/dashboard/dashboardPage";
-import UserPage from "./pages/user/userPage";
+import InterfaceV1 from "./pages/interfaces/interfaceV1";
+import InterfaceV2 from "./pages/interfaces/interfaceV2";
 
-const dockConfig: DockConfig = [
-  {
-    label: "Home",
-    icon: <Home />,
-    contentSideBar: (
-      <DockButtons
-        buttons={[
-          {
-            label: "Dashboard",
-            icon: <User />,
-            mainContent: <Dashboard />,
-          },
-          {
-            label: "Cliente",
-            icon: <User />,
-            mainContent: <ClientesPage />,
-          },
-        ]}
-      />
-    ),
-    mainContent: <div>Este é o conteúdo principal da Home.</div>,
-  },
-  {
-    label: "Usuário",
-    icon: <User />,
-    contentSideBar: (
-      <DockButtons
-        buttons={[
-          {
-            label: "Perfil",
-            icon: <User />,
-            mainContent: <UserPage/>,
-          },
-          {
-            label: "Configurações",
-            icon: <Settings />,
-            mainContent: <div>Configurações do usuário.</div>,
-          },
-        ]}
-      />
-    ),
-    mainContent: <div>Selecione uma opção no menu lateral do Usuário.</div>,
-  },
-  {
-    label: "Configurações",
-    icon: <Settings />,
-    contentSideBar: (
-      <DockButtons
-        buttons={[
-          {
-            label: "Perfil",
-            icon: <User />,
-            mainContent: <div>Informações do perfil do usuário.</div>,
-          },
-          {
-            label: "Configurações",
-            icon: <Settings />,
-            mainContent: <div>Configurações do usuário.</div>,
-          },
-        ]}
-      />
-    ),
-    
-    mainContent: <div>Configurações gerais do sistema.</div>,
-  },
-  {
-    label: "Outro botão",
-    icon: <Settings />,
-    contentSideBar: (
-      <DockButtons
-        buttons={[
-          {
-            label: "Perfil",
-            icon: <User />,
-            mainContent: <div>Informações do perfil do usuário.</div>,
-          },
-          {
-            label: "Configurações",
-            icon: <Settings />,
-            mainContent: <div>Configurações do usuário.</div>,
-          },
-        ]}
-      />
-    ),
-    
-    mainContent: <div>Configurações gerais do sistema.</div>,
-  },
-];
+const uiOption = [<InterfaceV1 />, <InterfaceV2 />];
 
 function App() {
   return (
     <div className="flex h-screen w-screen" data-theme="latetwist">
-      <Dock buttons={dockConfig} />
+      {uiOption[1]}
     </div>
   );
 }
