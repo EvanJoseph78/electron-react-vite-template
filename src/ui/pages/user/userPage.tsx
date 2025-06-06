@@ -59,6 +59,7 @@ const UserPage = () => {
         onRefresh={handleRefresh}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        stateKey="user_cliente_page_table"
       />
     </div>
   );

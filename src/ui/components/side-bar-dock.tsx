@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonNavigation from "./button-navigation";
+import { useSharedState } from "../pages/context/state-context";
 
 export type DockButton = {
   label: string;
@@ -15,8 +16,24 @@ const DockSideBar: React.FC<DockProps> = ({ buttons }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const { getState } = useSharedState();
+  const isSidebarFixed = getState("side_bar_state") as boolean;
+
+  // Sincroniza expansão ao alternar fixação
+  useEffect(() => {
+    setIsExpanded(isSidebarFixed);
+  }, [isSidebarFixed]);
+
   const handleClick = (index: number) => {
     setActiveIndex(index);
+  };
+
+  const handleMouseEnter = () => {
+    if (!isSidebarFixed) setIsExpanded(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!isSidebarFixed) setIsExpanded(false);
   };
 
   return (
@@ -24,10 +41,11 @@ const DockSideBar: React.FC<DockProps> = ({ buttons }) => {
       className={`h-full bg-neutral-800 text-neutral-content flex flex-col 
         py-4 transition-all duration-300
         ${isExpanded ? "w-56" : "w-[72px]"}`}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="h-10" />
+
       {buttons.map((btn, idx) => (
         <ButtonNavigation key={btn.label} page={btn.page}>
           <div
@@ -35,10 +53,9 @@ const DockSideBar: React.FC<DockProps> = ({ buttons }) => {
             className={`flex items-center gap-3 p-2 rounded-full transition w-full hover:cursor-pointer 
               ${
                 idx === activeIndex
-                  ? "bg-primary text-primary-content "
+                  ? "bg-primary text-primary-content"
                   : "hover:bg-primary/50"
-              }
-            `}
+              }`}
             title={btn.label}
           >
             <div className="text-[1.5em]">{btn.icon}</div>

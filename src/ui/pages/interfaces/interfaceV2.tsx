@@ -3,6 +3,7 @@ import DockSideBar from "../../components/side-bar-dock";
 import { useNavigation } from "../context/navigation-context";
 import HomePage from "../home/home";
 import ClientePage from "../clientes/clientePage";
+import Menubar from "../../components/menu-bar-component";
 
 const InterfaceV2 = () => {
   const { currentPage } = useNavigation();
@@ -40,8 +41,8 @@ const InterfaceV2 = () => {
       <DockSideBar buttons={buttons} />
 
       <div className="flex-1 flex flex-col bg-base-200 w-full h-full overflow-auto rounded-l-xl">
-        <div className="bg-base-100 h-16 p-4 border-b border-neutral-200">
-          Menu Bar
+        <div className="bg-base-100 h-16 border-b border-neutral-200">
+          <Menubar />
         </div>
         <div className="h-full w-full overflow-auto">{currentPage}</div>
       </div>

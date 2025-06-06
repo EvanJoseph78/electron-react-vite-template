@@ -1,4 +1,5 @@
-import React, { useState, type ReactNode } from "react";
+import React, { type ReactNode } from "react";
+import { useSharedState } from "../pages/context/state-context";
 
 interface TabItem {
   label: string;
@@ -8,10 +9,17 @@ interface TabItem {
 
 interface TabsLayoutProps {
   tabs: TabItem[];
+  stateKey: string; // Chave para identificar qual Tabs estamos controlando
 }
 
-const TabsLayout: React.FC<TabsLayoutProps> = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(0);
+const TabsLayout: React.FC<TabsLayoutProps> = ({ tabs, stateKey }) => {
+  const { getState, setState } = useSharedState();
+
+  const activeTab = getState<number>(stateKey) ?? 0;
+
+  const setActiveTab = (index: number) => {
+    setState(stateKey, index);
+  };
 
   return (
     <div className="h-full flex flex-col">
@@ -23,7 +31,7 @@ const TabsLayout: React.FC<TabsLayoutProps> = ({ tabs }) => {
           >
             <input
               type="radio"
-              name="tabs"
+              name={`tabs-${stateKey}`} // nome único por Tabs
               checked={activeTab === index}
               onChange={() => setActiveTab(index)}
               className="hidden"
@@ -35,7 +43,7 @@ const TabsLayout: React.FC<TabsLayoutProps> = ({ tabs }) => {
       </div>
 
       <div className="flex-1 bg-base-100 border-base-300 p-6 overflow-auto">
-        {tabs[activeTab].content}
+        {tabs[activeTab]?.content}
       </div>
     </div>
   );

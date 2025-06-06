@@ -42,6 +42,7 @@ const ClientTableList: React.FC = () => {
     return (
       <>
         <DynamicTable
+          stateKey="cliente_table"
           columns={["id", "nome", "email", "telefone"]}
           data={clientList}
           onCreate={handleCreate}

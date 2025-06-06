@@ -11,6 +11,7 @@ import {
   ArrowBigDown,
   Plus,
 } from "lucide-react";
+import { useSharedState } from "../pages/context/state-context";
 
 type TableProps = {
   columns: string[];
@@ -25,7 +26,14 @@ type TableProps = {
   pagination?: boolean;
   itemsPerPage?: number;
   createBtn?: ReactNode;
+  stateKey: string;
 };
+
+type TableStateProps = {
+    sortColumn: string | null,
+    sortDirection: "asc" | "desc",
+    currentPage: number,
+}
 
 const DynamicTable: React.FC<TableProps> = ({
   columns,
@@ -40,24 +48,58 @@ const DynamicTable: React.FC<TableProps> = ({
   pagination = true,
   itemsPerPage = 10,
   createBtn,
+  stateKey,
 }) => {
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+
+  const { getState, setState } = useSharedState();
+
+  // Estado inicial persistente
+  const initialState: TableStateProps = getState(stateKey) || {
+    sortColumn: null,
+    sortDirection: "asc",
+    currentPage: 1,
+  };
+
+  // Estados
+  const [sortColumn, setSortColumn] = useState<string | null>(
+    initialState.sortColumn
+  );
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">(
+    initialState.sortDirection
+  );
+  // const [searchVisible, setSearchVisible] = useState<boolean>(
+  //   initialState.searchVisible
+  // );
+  // const [searchColumn, setSearchColumn] = useState<string>(
+  //   initialState.searchColumn
+  // );
+  // const [searchValue, setSearchValue] = useState<string>(
+  //   initialState.searchValue
+  // );
+  const [currentPage, setCurrentPage] = useState<number>(
+    initialState.currentPage
+  );
+  // const [dropdownOpen, setDropdownOpen] = useState<boolean>(
+  //   initialState.dropdownOpen
+  // );
+
+  // const [sortColumn, setSortColumn] = useState<string | null>(null);
+  // const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const [searchVisible, setSearchVisible] = useState<boolean>(false);
   const [searchColumn, setSearchColumn] = useState<string>(columns[0]);
   const [searchValue, setSearchValue] = useState<string>("");
-
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handleSort = (col: string) => {
     if (sortColumn === col) {
-      setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
+      const newDirection = sortDirection === "asc" ? "desc" : "asc";
+      setSortDirection(newDirection);
+      persistState({ sortDirection: newDirection });
     } else {
       setSortColumn(col);
       setSortDirection("asc");
+      persistState({ sortColumn: col, sortDirection: "asc" });
     }
   };
 
@@ -91,6 +133,7 @@ const DynamicTable: React.FC<TableProps> = ({
 
   const clearSearch = () => {
     setSearchValue("");
+    // persistState({ searchValue: "", searchVisible: false });
     setSearchVisible(false);
     setDropdownOpen(false);
   };
@@ -129,6 +172,18 @@ const DynamicTable: React.FC<TableProps> = ({
     }
 
     return pages;
+  };
+
+  const persistState = (updated: Partial<typeof initialState>) => {
+    setState(stateKey, {
+      sortColumn,
+      sortDirection,
+      searchColumn,
+      searchVisible,
+      searchValue,
+      currentPage,
+      ...updated,
+    });
   };
 
   return (
@@ -325,7 +380,10 @@ const DynamicTable: React.FC<TableProps> = ({
                 className={`btn btn-sm ${
                   currentPage === page ? "btn-primary" : "btn-outline"
                 }`}
-                onClick={() => setCurrentPage(Number(page))}
+                onClick={() => {
+                  setCurrentPage(Number(page));
+                  persistState({ currentPage: page });
+                }}
               >
                 {page}
               </button>

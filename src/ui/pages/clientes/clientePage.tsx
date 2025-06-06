@@ -9,8 +9,14 @@ const ClientePage: React.FC = () => {
       icon: <User className="size-4 me-2" />,
       content: <ClientTableList />,
     },
+    {
+      label: "Novo cliente",
+      icon: <User className="size-4 me-2" />,
+      content: <ClientTableList />,
+    },
   ];
 
-  return <TabsLayout tabs={tabs}></TabsLayout>;
+  // stateKey preserva o estado do componente quando este é fechado
+  return <TabsLayout tabs={tabs} stateKey="cliente_tab"></TabsLayout>;
 };
 export default ClientePage;

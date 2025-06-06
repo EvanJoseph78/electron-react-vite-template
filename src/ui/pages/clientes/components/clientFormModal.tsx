@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type ClientFormInputs = {
   name: string;
@@ -29,7 +30,7 @@ const ClientFormModal: React.FC<{
 
   const handleFormSubmit: SubmitHandler<ClientFormInputs> = async (data) => {
     try {
-      const client: Omit<Client, 'id'> = {
+      const client: Omit<Client, "id"> = {
         // id: 0,
         nome: data.name,
         email: data.email,
@@ -41,10 +42,12 @@ const ClientFormModal: React.FC<{
       await onSubmit(data);
 
       console.log("Cliente salvo no banco de dados:", client);
+      toast.success("Cliente cadastrado com sucesso");
       reset();
       handleClose();
     } catch (error) {
       console.error("Erro ao salvar cliente:", error);
+      toast.error("Erro ao cadastrar cliente");
     }
   };
 
@@ -78,13 +81,17 @@ const ClientFormModal: React.FC<{
 
   return (
     <>
-      <button className="btn btn-primary rounded-md shadow-xl" onClick={handleOpen}>
+      <button
+        className="btn btn-primary rounded-md shadow-xl"
+        onClick={handleOpen}
+      >
         <Plus></Plus>
         Cadastrar
       </button>
       {open && (
         <div className="modal modal-open flex items-center justify-center">
-          <div className="modal-box w-full max-w-md shadow-lg rounded-xs bg-base-100 ">
+          <div className="modal-box w-full max-w-md shadow-lg rounded-xl bg-base-100 ">
+            {/* <div className="w-[60%] h-[70%] bg-base-100 rounded-xl flex flex-col justify-center items-center"> */}
             <button
               type="button"
               className="absolute top-3 right-3 btn btn-sm btn-circle btn-ghost"

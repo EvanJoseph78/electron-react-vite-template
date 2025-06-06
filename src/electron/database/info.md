@@ -163,3 +163,20 @@ Perfeito! Aqui está o modelo de banco de dados completo em Markdown, incluindo 
 
 Se desejar, posso gerar esse modelo como diagrama (ERD), ou criar os comandos SQL (`CREATE TABLE`) para SQLite.
 Quer que eu gere? 😊
+
+
+
+
+
+
+
+
+
+
+
+
+
+Evandro José da Silva Mariano
+
+
+
