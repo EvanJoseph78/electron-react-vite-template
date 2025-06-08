@@ -208,7 +208,7 @@ const DynamicTable: React.FC<TableProps> = ({
           <div className="flex gap-2 items-center">
             {searchVisible ? (
               <div className="relative">
-                <div className="flex items-center border rounded-md bg-white p-2">
+                <div className="flex items-center rounded-md bg-base-100 p-2 gap-1">
                   <div
                     className="flex items-center gap-1 px-2 cursor-pointer hover:bg-gray-100 rounded-l-md"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -221,7 +221,7 @@ const DynamicTable: React.FC<TableProps> = ({
 
                   <input
                     type="text"
-                    className="input input-xs border-0 focus:outline-none"
+                    className="input input-xs rounded-xs border-neutral-300 focus:outline-none "
                     placeholder={`Buscar em ${searchColumn}...`}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
@@ -238,7 +238,7 @@ const DynamicTable: React.FC<TableProps> = ({
 
                 {/* Dropdown */}
                 {dropdownOpen && (
-                  <div className="absolute z-20 mt-1 bg-white border rounded-md shadow-md w-40 ">
+                  <div className="absolute z-20 mt-1 bg-white border border-neutral-300 rounded-md shadow-2xl w-40 ">
                     {columns.map((col) => (
                       <div
                         key={col}

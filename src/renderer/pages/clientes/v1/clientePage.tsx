@@ -1,6 +1,6 @@
 import { User } from "lucide-react";
-import TabsLayout from "../../components/tabs-layout";
-import ClientTableList from "./components/clientTableList";
+import TabsLayout from "../../../layouts/tabs-layout";
+import ClientTableList from "../components/clientTableList";
 
 const ClientePage: React.FC = () => {
   const tabs = [

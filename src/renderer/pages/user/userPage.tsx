@@ -1,4 +1,4 @@
-import DynamicTable from "../../components/table";
+import DynamicTable from "../../layouts/table-layout";
 
 const UserPage = () => {
   const columns = ["id", "nome", "email", "cargo"];

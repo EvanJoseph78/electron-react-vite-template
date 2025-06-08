@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DynamicTable from "../../../components/table";
+import DynamicTable from "../../../layouts/table-layout";
 // import { Component } from "lucide-react";
 import ClientFormModal from "./clientFormModal";
 

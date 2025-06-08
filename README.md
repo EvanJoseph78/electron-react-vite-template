@@ -91,4 +91,9 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
 
-Se quiser, eu posso gerar esse arquivo em `.md` e te enviar! Quer?
+## TODO
+[ ] - Arrumar modal de cliente
+[ ] - Definir outras estruturas da página
+[ ] - Remover arquivos desnecessários
+
+

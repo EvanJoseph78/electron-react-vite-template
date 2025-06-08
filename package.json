@@ -19,15 +19,22 @@
     "postinstall": "electron-rebuild"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.0",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.7",
     "better-sqlite3": "^11.10.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "daisyui": "^5.0.37",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
     "react-hot-toast": "^2.5.2",
-    "tailwindcss": "^4.1.7"
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.7",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

@@ -2,8 +2,9 @@ import { Home, LayoutDashboard, Package, Settings, User } from "lucide-react";
 import DockSideBar from "../../components/side-bar-dock";
 import { useNavigation } from "../context/navigation-context";
 import HomePage from "../home/home";
-import ClientePage from "../clientes/clientePage";
+import ClientePage from "../clientes/v1/clientePage";
 import Menubar from "../../components/menu-bar-component";
+import { Button } from "../../components/ui/button"; 
 
 const InterfaceV2 = () => {
   const { currentPage } = useNavigation();
@@ -32,7 +33,9 @@ const InterfaceV2 = () => {
     {
       label: "Configurações",
       icon: <Settings />,
-      page: <div>⚙️ Página de Configurações</div>,
+      page: <div>⚙️ 
+        <Button variant={"ghost"}>botão</Button>
+      </div>,
     },
   ];
 

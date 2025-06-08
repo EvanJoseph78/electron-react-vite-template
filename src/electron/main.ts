@@ -9,6 +9,10 @@ import "./controllers/clienteController.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
+    width: 1280, // largura inicial (opcional)
+    height: 720, // altura inicial (opcional)
+    minWidth: 1280, // largura mínima
+    minHeight: 720, // altura mínima
     webPreferences: {
       preload: getPreloadPath(),
     },
@@ -22,5 +26,4 @@ app.on("ready", () => {
 
   // Desativa a barra de menu
   mainWindow.setMenuBarVisibility(false);
- 
 });
