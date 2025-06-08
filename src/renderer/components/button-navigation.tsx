@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useNavigation } from "../pages/context/navigation-context";
+import { useNavigation } from "../context/navigation-context"; 
 
 type RouteButton = {
   page: ReactNode;

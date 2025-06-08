@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import HomePage from "../home/home";
+import HomePage from "../pages/home/home"; 
 
 interface NavigationContextType {
   currentPage: ReactNode;

@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
-import { useSharedState } from "../pages/context/state-context";
+import { useSharedState } from "../context/state-context"; 
 
 interface TabItem {
   label: string;

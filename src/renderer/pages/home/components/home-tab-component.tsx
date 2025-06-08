@@ -3,7 +3,7 @@ import FormLayout from "../../../layouts/form-layout";
 import ModalLayout from "../../../layouts/modal-layout";
 import toast from "react-hot-toast";
 import ClientForm from "../../../components/forms/client-form";
-import { Input } from "../../../components/ui/input";
+import { ClienteForm } from "../../clientes/clientForm";
 
 const TabHome: React.FC = () => {
   return (
@@ -16,11 +16,7 @@ const TabHome: React.FC = () => {
           }}
         />
       </ModalLayout>
-      <Input
-        onChange={() => {
-          toast.success("evan");
-        }}
-      ></Input>
+      <ClienteForm />
     </div>
   );
 };

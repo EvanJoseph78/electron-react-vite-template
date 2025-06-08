@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ButtonNavigation from "./button-navigation";
-import { useSharedState } from "../pages/context/state-context";
+import { useSharedState } from "../context/state-context"; 
 
 export type DockButton = {
   label: string;

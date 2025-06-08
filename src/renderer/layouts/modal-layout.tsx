@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import React, { type ReactNode } from "react";
-import { useSharedState } from "../pages/context/state-context";
+import { useSharedState } from "../context/state-context"; 
 
 interface ModalLayoutProps {
   modalName?: string;

@@ -11,7 +11,7 @@ import {
   ArrowBigDown,
   Plus,
 } from "lucide-react";
-import { useSharedState } from "../pages/context/state-context";
+import { useSharedState } from "../context/state-context"; 
 
 type TableProps = {
   columns: string[];

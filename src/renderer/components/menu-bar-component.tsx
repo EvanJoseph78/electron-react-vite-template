@@ -1,6 +1,6 @@
 import { Sidebar } from "lucide-react";
 import React from "react";
-import { useSharedState } from "../pages/context/state-context";
+import { useSharedState } from "../context/state-context"; 
 
 const Menubar: React.FC = () => {
   const { getState, setState } = useSharedState();

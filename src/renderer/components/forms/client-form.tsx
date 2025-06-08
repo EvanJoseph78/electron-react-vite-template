@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useSharedState } from "../../pages/context/state-context";
+import { useSharedState } from "../../context/state-context";
 
 type ClientFormInputs = {
   nome: string;

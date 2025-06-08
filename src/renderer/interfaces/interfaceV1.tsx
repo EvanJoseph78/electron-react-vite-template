@@ -1,9 +1,9 @@
 import { Home, Settings, User } from "lucide-react";
-import Dock from "../../components/dock";
-import DockButtons from "../../components/dock-buttons";
-import ClientesPage from "../clientes/clientesPage";
-import DashboardPage from "../dashboard/dashboardPage";
-import UserPage from "../user/userPage";
+import Dock from "../components/dock";
+import DockButtons from "../components/dock-buttons";
+import ClientesPage from "../pages/clientes/clientesPage";
+import DashboardPage from "../pages/dashboard/dashboardPage";
+import UserPage from "../pages/user/userPage";
 
 const dockConfig: DockConfig = [
   {
@@ -36,7 +36,7 @@ const dockConfig: DockConfig = [
           {
             label: "Perfil",
             icon: <User />,
-            mainContent: <UserPage/>,
+            mainContent: <UserPage />,
           },
           {
             label: "Configurações",
@@ -67,7 +67,7 @@ const dockConfig: DockConfig = [
         ]}
       />
     ),
-    
+
     mainContent: <div>Configurações gerais do sistema.</div>,
   },
   {
@@ -89,7 +89,7 @@ const dockConfig: DockConfig = [
         ]}
       />
     ),
-    
+
     mainContent: <div>Configurações gerais do sistema.</div>,
   },
 ];
@@ -97,7 +97,7 @@ const dockConfig: DockConfig = [
 function InterfaceV1() {
   return (
     <div className="flex h-screen w-screen" data-theme="latetwist">
-      <Dock buttons={dockConfig} /> 
+      <Dock buttons={dockConfig} />
     </div>
   );
 }
