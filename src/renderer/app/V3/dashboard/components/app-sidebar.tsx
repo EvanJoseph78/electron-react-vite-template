@@ -1,58 +1,60 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+"use client";
 
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../../../../components/ui/sidebar"
+  useSidebar,
+} from "../../../../components/ui/sidebar";
 
-// Menu items.
 const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-]
+  { title: "Home", url: "#", icon: Home },
+  { title: "Inbox", url: "#", icon: Inbox },
+  { title: "Calendar", url: "#", icon: Calendar },
+  { title: "Search", url: "#", icon: Search },
+  { title: "Settings", url: "#", icon: Settings },
+];
 
 export function AppSidebar() {
+  const { hover, setOpen } = useSidebar();
+
+  const handleMouseEnter = () => {
+    if (hover) setOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (hover) setOpen(false);
+  };
+
   return (
-    <Sidebar>
+    <Sidebar
+      collapsible="icon"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>Evan</SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem className="hover:bg-neutral-500" key={item.title}>
+                <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon />
+                      <item.icon className="size-5" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -63,5 +65,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

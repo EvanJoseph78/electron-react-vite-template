@@ -36,6 +36,8 @@ type SidebarContextProps = {
   state: "expanded" | "collapsed";
   open: boolean;
   setOpen: (open: boolean) => void;
+  hover: boolean;
+  setHover: (hover: boolean) => void;
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
@@ -112,18 +114,21 @@ function SidebarProvider({
   // We add a state so that we can do data-state="expanded" or "collapsed".
   // This makes it easier to style the sidebar with Tailwind classes.
   const state = open ? "expanded" : "collapsed";
+  const [hover, setHover] = React.useState(false);
 
   const contextValue = React.useMemo<SidebarContextProps>(
     () => ({
       state,
       open,
+      hover,
       setOpen,
       isMobile,
       openMobile,
       setOpenMobile,
       toggleSidebar,
+      setHover,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [hover, setHover, state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   );
 
   return (
@@ -258,7 +263,7 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, setHover, hover } = useSidebar();
 
   return (
     <Button
@@ -270,6 +275,7 @@ function SidebarTrigger({
       onClick={(event: any) => {
         onClick?.(event);
         toggleSidebar();
+        setHover(hover ? false : true);
       }}
       {...props}
     >
